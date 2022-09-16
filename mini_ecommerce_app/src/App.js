@@ -1,12 +1,19 @@
 
 import './App.css';
 import Navbar from './Components/Navbar';
-
+import { Routes, Route, Link } from "react-router-dom";
+import { Home } from './Pages/Home';
+import { ShopPage } from './Pages/ShopPage';
+import { SingleEntityPage } from './Pages/SingleEntityPage';
 function App() {
   return (
     <div className="App">
-      <h1>E Commerce</h1>
       <Navbar/>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/collection/all" element={<ShopPage />}/>
+        <Route path="/collection/all/:id" element={<SingleEntityPage />}/>
+       </Routes>
     </div>
   );
 }
