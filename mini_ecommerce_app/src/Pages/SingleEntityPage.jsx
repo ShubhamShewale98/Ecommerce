@@ -47,7 +47,7 @@ const SingleEntityPage = () => {
         <Box>
           <Text as="em">Choose A Size</Text>
           <HStack p={4}>
-            {Product?.sizes.map((size) => {
+            {Product?.sizes.map((size , id) => {
               return <Button key={size} onClick={()=>{setSize(size)}}>{size}</Button>;
             })}
           </HStack>
