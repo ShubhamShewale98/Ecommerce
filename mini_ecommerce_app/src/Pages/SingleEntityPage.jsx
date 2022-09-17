@@ -3,14 +3,17 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../Redux/Cart/ActionTypes";
 import { getDataSingle } from "../Redux/Products/Action";
 import { Products } from "./Products";
 
 const SingleEntityPage = () => {
   const { id } = useParams();
-  const Product = useSelector((state) => state.single);
-  const singleLoading = useSelector((state) => state.singleLoading);
-  const singleError = useSelector((state) => state.singleError);
+  const Product = useSelector((state) => state.product.single);
+  const CartProduct = useSelector((state) => state.cart.cart);
+
+  const singleLoading = useSelector((state) => state.product.singleLoading);
+  const singleError = useSelector((state) => state.product.singleError);
   const dispatch = useDispatch();
   const [size,setSize] = useState()
 
@@ -28,6 +31,14 @@ const SingleEntityPage = () => {
   if (Object.keys(Product).length == 0) {
     return <h1>Product {id} Not found ...</h1>;
   }
+  const handlerAddToCart = () =>{
+  let payload = {
+    ...Product,
+    size
+  }
+  dispatch(addToCart(payload))
+  }
+  console.log(CartProduct)
   return (
     <>
       {" "}
@@ -40,7 +51,7 @@ const SingleEntityPage = () => {
               return <Button key={size} onClick={()=>{setSize(size)}}>{size}</Button>;
             })}
           </HStack>
-          <Button bg='yellow' m={4} p = {4} disabled={!size}>  {!size ? "please Select Size" :"ADD TO CART"}    </Button>
+          <Button bg='yellow' onClick={()=>{handlerAddToCart()}} m={4} p = {4} disabled={!size}>  {!size ? "please Select Size" :"ADD TO CART"}    </Button>
         </Box>
       </Flex>
     </>

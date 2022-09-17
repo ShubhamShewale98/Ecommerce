@@ -6,10 +6,10 @@ import { Filter } from "../Components/Filter";
 import { Products } from "./Products";
 import { Grid, GridItem } from "@chakra-ui/react";
 const ShopPage = () => {
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const loading = useSelector((state) => state.product.loading);
+  const error = useSelector((state) => state.product.error);
 
-  const product = useSelector((state) => state.products);
+  const product = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   useEffect(() => {
     if (product?.length === 0) {

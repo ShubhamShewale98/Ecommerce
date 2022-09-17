@@ -3,8 +3,11 @@ import { Flex, Spacer, Image, Text, Icon } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsSearch, BsBasket3 } from "react-icons/bs";
 import { RiUserLine } from "react-icons/ri";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const CartProduct = useSelector((state) => state.cart.cart);
+
   return (
     <div>
       {" "}
@@ -64,10 +67,11 @@ const Navbar = () => {
 
         <Spacer />
         <Icon boxSize="18px" mx={3} my={2} as={BsSearch} />
+        <Icon boxSize="18px" mx={3} my={2} as={RiUserLine} />3
         <Icon boxSize="18px" mx={3} my={2} as={BsBasket3} />
-        <Icon boxSize="18px" mx={3} my={2} as={RiUserLine} />
+        
         <Text mx={0} my={1}>
-          0
+          { CartProduct ? CartProduct.length : "0"}
         </Text>
         <Spacer />
       </Flex>
